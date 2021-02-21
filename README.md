@@ -9,3 +9,6 @@ API RESTful Spring boot para agendamento de envio de mensagens, com banco de dad
 
 #### Versão 1.0.0
 - Criação do projeto Spring Boot, configuração de conexão do banco de dados PostgreSQL e implementação da classe de modelo de entidade
+
+#### Versão 1.0.2
+- Criação de interface extendendo JPARepository para persistência de dados
