@@ -1,5 +1,7 @@
 package br.com.lulabs.agendamento.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -8,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity @Data
 @Table(name = "AGENDAMENTO")
@@ -18,10 +21,9 @@ public class AgendamentoModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE, pattern = "")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "")
     @Column(name= "data_criacao", nullable = false, columnDefinition = "DATE")
-    private LocalDate dataCriacao;
+    private LocalDateTime dataCriacao;
 
     @NotBlank(message = "O nome do destinatário é obrigatório.")
     @Size(max = 100, message = "O nome do destinatário deve conter no máximo 100 caracteres.")
@@ -35,12 +37,13 @@ public class AgendamentoModel implements Serializable {
 
     @NotNull
     @FutureOrPresent(message = "{FutureOrPresent.agendamento.dataEnvio}")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE, pattern = "")
+    @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
     @Column(name= "data_envio", nullable = false, columnDefinition = "DATE")
-    private LocalDate dataEnvio;
+    private LocalDateTime dataEnvio;
 
+    @NotNull
     @Column(columnDefinition = "boolean default false")
-    private Boolean enviado;
+    private Boolean enviado = Boolean.FALSE;
 
     @NotBlank(message = "É necessário definir uma plataforma de envio.")
     @Column(name = "plataforma", nullable = false)

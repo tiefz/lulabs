@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @RestController
 public class AgendamentoController {
@@ -20,6 +21,7 @@ public class AgendamentoController {
 
     @PostMapping("/agendamento")
     public ResponseEntity<AgendamentoModel> salvaAgendamento(@RequestBody @Valid AgendamentoModel agendamentoModel) {
+        agendamentoModel.setDataCriacao(LocalDateTime.now());
         return new ResponseEntity<AgendamentoModel>(agendamentoRepository.save(agendamentoModel), HttpStatus.CREATED);
     }
 }
