@@ -1,6 +1,7 @@
 package br.com.lulabs.agendamento.model;
 
 import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -38,9 +39,8 @@ public class AgendamentoModel implements Serializable {
     @Column(name= "data_envio", nullable = false, columnDefinition = "DATE")
     private LocalDate dataEnvio;
 
-    @NotBlank
-    @Column(name = "status", nullable = false)
-    private String status;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean enviado;
 
     @NotBlank(message = "É necessário definir uma plataforma de envio.")
     @Column(name = "plataforma", nullable = false)
