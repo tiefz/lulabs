@@ -22,7 +22,7 @@ public class AgendamentoModel implements Serializable {
     private Long id;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "")
-    @Column(name= "data_criacao", nullable = false, columnDefinition = "DATE")
+    @Column(name= "data_criacao", nullable = false, columnDefinition = "TIMESTAMP")
     private LocalDateTime dataCriacao;
 
     @NotBlank(message = "O nome do destinatário é obrigatório.")
@@ -38,7 +38,7 @@ public class AgendamentoModel implements Serializable {
     @NotNull
     @FutureOrPresent(message = "{FutureOrPresent.agendamento.dataEnvio}")
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
-    @Column(name= "data_envio", nullable = false, columnDefinition = "DATE")
+    @Column(name= "data_envio", nullable = false, columnDefinition = "TIMESTAMP")
     private LocalDateTime dataEnvio;
 
     @NotNull
@@ -46,6 +46,6 @@ public class AgendamentoModel implements Serializable {
     private Boolean enviado = Boolean.FALSE;
 
     @NotBlank(message = "É necessário definir uma plataforma de envio.")
-    @Column(name = "plataforma", nullable = false)
+    @Column(name = "plataforma", nullable = false, length = 60)
     private String plataforma;
 }
