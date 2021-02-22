@@ -46,6 +46,6 @@ public class AgendamentoModel implements Serializable {
     private Boolean enviado = Boolean.FALSE;
 
     @NotBlank(message = "É necessário definir uma plataforma de envio.")
-    @Column(name = "plataforma", nullable = false)
+    @Column(name = "plataforma", nullable = false, length = 60)
     private String plataforma;
 }

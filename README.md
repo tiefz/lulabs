@@ -11,6 +11,21 @@ Objetivo do desafio é criar uma API RESTful com persistência em banco de dados
 
 Para implementação da API, estou utilizando Spring Boot versão 2.4.3 e para banco de dados utilizei uma imagem Docker de banco PostgreSQL versão 9.6.21-alpine.
 
+Banco PostgreSQL
+
+Banco LULABS
+Tabela agendamento
+
+id:             INT         PK
+data_criacao:   TIMESTAMP           NOTNULL
+destinatario:   VARCHAR     100     NOTNULL
+mensagem:       VARCHAR     280     NOTNULL
+data_envio:     TIMESTAMP           NOTNULL
+enviado:        BOOLEAN             NOTNULL
+plataforma:     VARCHAR     60      NOTNULL
+
+
+
 #### Versão 1.0.0
 - Criação do projeto Spring Boot, configuração de conexão do banco de dados PostgreSQL e implementação da classe de modelo de entidade
 
@@ -19,3 +34,6 @@ Para implementação da API, estou utilizando Spring Boot versão 2.4.3 e para b
 
 #### Versão 1.0.4
 - Criação de classe controller, configuração do endpoint POST /agendamento que receberá o payload JSON para criação de agendamentos e costumização do Jackson para formato de datas
+
+#### Versão 1.0.6
+- Criação dos demais endpoints de consulta GET (Retorna todos os agendamentos), GET by ID (Retorna um agendamento pelo ID) e DELETE (Remove um agendamento)
