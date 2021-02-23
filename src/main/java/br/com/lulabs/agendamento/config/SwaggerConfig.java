@@ -54,7 +54,7 @@ public class SwaggerConfig {
                 .version("1.0.10")
                 .license("The Unlicensed")
                 .licenseUrl("http://unlicense.org/")
-                        .contact(new Contact("Daniel Tief", "www.linkedin.com/in/tiefenbarher\n", "chinorex@gmail.com"))
+                        .contact(new Contact("Daniel Tief", "www.linkedin.com/in/tiefenbarher", "chinorex@gmail.com"))
                         .build();
     }
 }
