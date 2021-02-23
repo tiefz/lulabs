@@ -24,7 +24,10 @@ data_envio:     TIMESTAMP           NOTNULL
 enviado:        BOOLEAN             NOTNULL
 plataforma:     VARCHAR     60      NOTNULL
 
+Instalação e testes:
 
+Documentação da API em Swagger:
+    http://localhost:8080//swagger-ui.html#/agendamento-controller
 
 #### Versão 1.0.0
 - Criação do projeto Spring Boot, configuração de conexão do banco de dados PostgreSQL e implementação da classe de modelo de entidade
@@ -37,3 +40,6 @@ plataforma:     VARCHAR     60      NOTNULL
 
 #### Versão 1.0.6
 - Criação dos demais endpoints de consulta GET (Retorna todos os agendamentos), GET by ID (Retorna um agendamento pelo ID) e DELETE (Remove um agendamento)
+
+#### Versão 1.0.8
+- Criação de documentação Swagger com Springfox. Swagger UI em http://localhost:8080//swagger-ui.html#/agendamento-controller
