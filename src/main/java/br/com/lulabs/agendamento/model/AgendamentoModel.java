@@ -55,4 +55,18 @@ public class AgendamentoModel implements Serializable {
     @NotBlank(message = "É necessário definir uma plataforma de envio.")
     @Column(name = "plataforma", nullable = false, length = 60)
     private String plataforma;
+
+    public AgendamentoModel() {
+
+    }
+
+    public AgendamentoModel(Long id, LocalDateTime dataCriacao, String destinatario, String mensagem, LocalDateTime dataEnvio, Boolean enviado, String plataforma) {
+        this.id = id;
+        this.dataCriacao = dataCriacao;
+        this.destinatario = destinatario;
+        this.mensagem = mensagem;
+        this.dataEnvio = dataEnvio;
+        this.enviado = enviado;
+        this.plataforma = plataforma;
+    }
 }

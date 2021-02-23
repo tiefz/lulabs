@@ -13,21 +13,13 @@ Para implementação da API, estou utilizando Spring Boot versão 2.4.3 e para b
 
 Banco PostgreSQL
 
-Banco LULABS
-Tabela agendamento
-
-id:             INT         PK
-data_criacao:   TIMESTAMP           NOTNULL
-destinatario:   VARCHAR     100     NOTNULL
-mensagem:       VARCHAR     280     NOTNULL
-data_envio:     TIMESTAMP           NOTNULL
-enviado:        BOOLEAN             NOTNULL
-plataforma:     VARCHAR     60      NOTNULL
-
 Instalação e testes:
 
 Documentação da API em Swagger:
     http://localhost:8080//swagger-ui.html#/agendamento-controller
+
+Projeto e Kanban:
+    https://github.com/tiefz/lulabs/projects/1
 
 #### Versão 1.0.0
 - Criação do projeto Spring Boot, configuração de conexão do banco de dados PostgreSQL e implementação da classe de modelo de entidade
@@ -43,3 +35,6 @@ Documentação da API em Swagger:
 
 #### Versão 1.0.8
 - Criação de documentação Swagger com Springfox. Swagger UI em http://localhost:8080//swagger-ui.html#/agendamento-controller
+
+#### Versão 1.0.10
+- Implementação de classes de Testes com JUnit em testes > AgendamentoTestes
