@@ -4,7 +4,7 @@
 
 
 # Luizalabs Agendamento
-### Desafio Técnico Luizalabs Agendamento de Mensagens
+## Desafio Técnico Luizalabs Agendamento de Mensagens
 API RESTful Spring boot para agendamento de envio de mensagens, com banco de dados PostgreSQL
 
 Objetivo do desafio é criar uma API RESTful com persistência em banco de dados, com um endpoint para criação do agendamento de envio de mensagem e outro para consulta de status do envio e remoção do agendamento.
@@ -28,35 +28,35 @@ plataforma | VARCHAR 60
 
 
 
-## Instalação e testes:
+# Instalação e testes:
 
-#### Teste live no Heroku
+## Teste live no Heroku
 
-# Método POST - Criação de agendamento:
+### Método POST - Criação de agendamento:
 
 Endpoint: https://lulabs.herokuapp.com/agendamento
 JSON: {"destinatario":"teste","mensagem":"Mensagem teste", "plataforma":"SMS","dataEnvio":"01-05-2021 00:00:00"}
 
 curl -d '{"destinatario":"teste","mensagem":"Mensagem teste", "plataforma":"SMS","dataEnvio":"01-05-2021 00:00:00"}' -H 'Content-Type: application/json' https://lulabs.herokuapp.com/agendamento
 
-# Método GET - Consultar um agendamento por ID ou todos os agendamentos 
+### Método GET - Consultar um agendamento por ID ou todos os agendamentos 
 
 Endpoint: https://lulabs.herokuapp.com/agendamento/consulta 
 Endpoint: https://lulabs.herokuapp.com/agendamento/consulta/{id}
 
-# Método DELETE - Remover um agendamento
+### Método DELETE - Remover um agendamento
 
 Endpoint: https://lulabs.herokuapp.com/agendamento/consulta/{id}
 
-# Documentação da API em Swagger:
+### Documentação da API em Swagger:
     http://localhost:8080//swagger-ui.html#/agendamento-controller
     Heroku URL: https://lulabs.herokuapp.com/swagger-ui.html
 
-# Projeto e Kanban:
+### Projeto e Kanban:
     https://github.com/tiefz/lulabs/projects/1
 
 
-#### Teste local
+# Teste local
 
 Banco de dados PostgreSQL - 
 DB = lulabs 
@@ -68,20 +68,20 @@ Se preferir, utilizar imagem do Docker: ocker run --name lulabs-postgres -e POST
 Clonar o projeto e para teste seguir os mesmos endpoints do exemplo acima
 Para criação de agendamento, utilizar JSON no formato abaixo:
 
-,,,
+```
 {
     "destinatario":"string",
     "mensagem":"string", 
     "plataforma":"string",
     "dataEnvio":"01-12-2021 00:00:00"
 }
-,,,
+```
 
 #### Teste local com Docker-compose
 
 arquivo docker-composer.yml
 
-,,,
+```
 version: '2'
 
 services:
@@ -106,7 +106,7 @@ services:
     environment:
       - POSTGRES_USER=compose-postgres
       - POSTGRES_PASSWORD=compose-postgres
-,,,
+```
 
 
 
