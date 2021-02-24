@@ -1,6 +1,6 @@
 package br.com.lulabs.agendamento;
 
-import br.com.lulabs.agendamento.model.AgendamentoModel;
+import br.com.lulabs.agendamento.entity.AgendamentoEntity;
 import br.com.lulabs.agendamento.repository.AgendamentoRepository;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
@@ -23,9 +23,9 @@ public class AgendamentoTestes {
     @Rollback(false)
     public void testeAgendamento() {
         LocalDateTime dataCriacao = LocalDateTime.now();
-        LocalDateTime dataEnvio = LocalDateTime.of(2021,12,01,00,00,00,000);
-        AgendamentoModel agendamentoModel = new AgendamentoModel(999999L, dataCriacao, "Tief", "Mensagem de teste", dataEnvio,false, "SMS");
-        AgendamentoModel agendamentoSalvo = agendamentoRepository.save(agendamentoModel);
+        LocalDateTime dataEnvio = LocalDateTime.now().plusDays(1);
+        AgendamentoEntity agendamentoEntity = new AgendamentoEntity(999999L, dataCriacao, "Tief", "Mensagem de teste", dataEnvio,false, "SMS");
+        AgendamentoEntity agendamentoSalvo = agendamentoRepository.save(agendamentoEntity);
         Assert.assertNotNull(agendamentoSalvo);
     }
 
@@ -39,7 +39,7 @@ public class AgendamentoTestes {
     @Test
     public void testeRemoveAgendamento() {
         long id = 999999L;
-        Optional<AgendamentoModel> agendamentoResponse = agendamentoRepository.findById(id);
+        Optional<AgendamentoEntity> agendamentoResponse = agendamentoRepository.findById(id);
         if (agendamentoResponse.isPresent()) {
             agendamentoRepository.delete(agendamentoResponse.get());
         }
