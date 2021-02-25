@@ -24,6 +24,9 @@ data_envio | TIMESTAMP
 enviado | BOOLEAN
 plataforma | VARCHAR 60
 
+Para testes utilizei JUnit e Mockito com as classes AgendamentoEntityTests e AgendamentoControllerTests, para documentação utilizei o plugin Springfox.
+Todo o controle de versionamento foi baseado no modelo Gitflow utilizando o Github e finalmente para CI/CD, utilizei o Travis integrado com o Heroku e Dockerhub para publicação da versão em container da aplicação. 
+
 
 
 
@@ -138,4 +141,13 @@ services:
 - Implementação de uma classe service para organizar os métodos separando a camada de negócio
 
 #### Versão 1.0.12
-Implementação de CI com Travis e deploy automático no Heroku
+- Implementação de CI com Travis e deploy automático no Heroku
+
+#### Versão 1.0.13
+- Correções da configuração do pipeline no Travis
+
+#### Versão 1.0.14
+- Implementação de teste de controllers com Mockito
+
+#### Versão 1.1.0
+- Versão final para avaliação
