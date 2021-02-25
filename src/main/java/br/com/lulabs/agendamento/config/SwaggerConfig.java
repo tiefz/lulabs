@@ -28,23 +28,7 @@ public class SwaggerConfig {
                 .apis(RequestHandlerSelectors.basePackage("br.com.lulabs.agendamento.controller"))
                 .paths(PathSelectors.any())
                 .build().useDefaultResponseMessages(false)
-                .apiInfo(apiInfo())
-                .globalResponseMessage(RequestMethod.GET, responseMessageForGET());
-    }
-
-    private List<ResponseMessage> responseMessageForGET()
-    {
-        return new ArrayList<ResponseMessage>() {{
-            add(new ResponseMessageBuilder()
-                    .code(500)
-                    .message("500 message")
-                    .responseModel(new ModelRef("Error"))
-                    .build());
-            add(new ResponseMessageBuilder()
-                    .code(403)
-                    .message("Forbidden!")
-                    .build());
-        }};
+                .apiInfo(apiInfo());
     }
 
     private ApiInfo apiInfo() {
