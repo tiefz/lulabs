@@ -5,7 +5,7 @@ services:
   - postgresql
 before_script:
  - psql -c "CREATE DATABASE lulabs;" -U postgres
- - psql -c "CREATE USER postgres WITH PASSWORD 'postgres';" -U postgres
+ - sudo -u postgres psql -c "ALTER ROLE postgres WITH password 'postgres'"
 env:
   global:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/lulabs
