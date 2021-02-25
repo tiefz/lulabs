@@ -4,16 +4,9 @@ jdk:
 services:
   - postgresql
 before_script:
-  - psql -c 'create database lulabs;' -U postgres
-  - sudo -u postgres psql -c "ALTER ROLE postgres WITH password 'postgres'"
-env:
-  global:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/lulabs
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=postgres
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+ - psql -c "CREATE DATABASE lulabs;" -U postgres
+ - sudo -u postgres psql -c "ALTER ROLE postgres WITH password 'postgres'"
 deploy:
  provider: heroku
- api-key: 
-  secure: $HEROKU_API_KEY
+ api-key: $TOKEN
  app: $APP
