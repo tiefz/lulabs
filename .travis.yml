@@ -8,7 +8,7 @@ before_script:
  - sudo -u postgres psql -c "ALTER ROLE postgres WITH password 'postgres'"
 env:
   global:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/lulabs
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/lulabs
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=postgres
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
