@@ -6,9 +6,6 @@ services:
 before_script:
  - psql -c "CREATE DATABASE lulabs;" -U postgres
  - sudo -u postgres psql -c "ALTER ROLE postgres WITH password 'postgres'"
- env:
-  global:
-  - PGPORT=5432
 deploy:
  provider: heroku
  api-key: 
