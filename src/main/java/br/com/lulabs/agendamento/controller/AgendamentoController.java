@@ -1,7 +1,9 @@
 package br.com.lulabs.agendamento.controller;
 
-import br.com.lulabs.agendamento.entity.AgendamentoEntity;
+import br.com.lulabs.agendamento.entity.Agendamento;
 import br.com.lulabs.agendamento.repository.AgendamentoRepository;
+import br.com.lulabs.agendamento.service.AgendamentoService;
+import com.sun.javaws.progress.PreloaderPostEventListener;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -20,7 +22,7 @@ import java.util.Optional;
 public class AgendamentoController {
 
     @Autowired
-    AgendamentoRepository agendamentoRepository;
+    AgendamentoService service;
 
     @ApiOperation(value = "Cria um agendamento para envio de mensagens")
     @ApiResponses(value = {
@@ -29,9 +31,8 @@ public class AgendamentoController {
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
     @PostMapping("/agendamentos")
-    public ResponseEntity<AgendamentoEntity> salvar(@RequestBody @Valid AgendamentoEntity agendamentoEntity) {
-        agendamentoEntity.setDataCriacao(LocalDateTime.now());
-        return new ResponseEntity<AgendamentoEntity>(agendamentoRepository.save(agendamentoEntity), HttpStatus.CREATED);
+    public ResponseEntity<Agendamento> salvar(@RequestBody @Valid Agendamento agendamento) {
+        return new ResponseEntity<Agendamento>(service.salvar(agendamento), HttpStatus.CREATED);
     }
 
     @ApiOperation(value = "Retorna a lista de agendamentos")
@@ -41,12 +42,12 @@ public class AgendamentoController {
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
     @GetMapping("/agendamentos")
-    private ResponseEntity<List<AgendamentoEntity>> consultar() {
-        List<AgendamentoEntity> consultas = agendamentoRepository.findAll();
+    private ResponseEntity<List<Agendamento>> consultar() {
+        List<Agendamento> consultas = service.buscar();
         if (consultas.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
-            return new ResponseEntity<List<AgendamentoEntity>>(consultas, HttpStatus.OK);
+            return new ResponseEntity<List<Agendamento>>(consultas, HttpStatus.OK);
         }
     }
 
@@ -57,10 +58,10 @@ public class AgendamentoController {
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
     @GetMapping("/agendamentos/{id}")
-    private ResponseEntity<AgendamentoEntity> consultaPorId(@PathVariable(value = "id") long id) {
-        Optional<AgendamentoEntity> consulta = agendamentoRepository.findById(id);
+    private ResponseEntity<Agendamento> consultaPorId(@PathVariable(value = "id") long id) {
+        Optional<Agendamento> consulta = service.buscarPorId(id);
         if (consulta.isPresent()) {
-            return new ResponseEntity<AgendamentoEntity>(consulta.get(), HttpStatus.OK);
+            return new ResponseEntity<Agendamento>(consulta.get(), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -73,13 +74,7 @@ public class AgendamentoController {
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
     @DeleteMapping("/agendamentos/{id}")
-    private ResponseEntity<AgendamentoEntity> remover(@PathVariable(value = "id") long id) {
-        Optional<AgendamentoEntity> agendamento = agendamentoRepository.findById(id);
-        if (agendamento.isPresent()) {
-            agendamentoRepository.delete(agendamento.get());
-            return new ResponseEntity<>(HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
+    private ResponseEntity<Agendamento> remover(@PathVariable(value = "id") long id) {
+        return service.remover(id) ? new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

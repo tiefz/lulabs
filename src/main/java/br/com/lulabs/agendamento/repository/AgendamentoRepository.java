@@ -1,7 +1,7 @@
 package br.com.lulabs.agendamento.repository;
 
-import br.com.lulabs.agendamento.entity.AgendamentoEntity;
+import br.com.lulabs.agendamento.entity.Agendamento;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface AgendamentoRepository extends JpaRepository<AgendamentoEntity, Long> {
+public interface AgendamentoRepository extends JpaRepository<Agendamento, Long> {
 }

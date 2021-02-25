@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class AgendamentoTestes {
+public class EntityTests {
 
     @Autowired
     AgendamentoRepository agendamentoRepository;

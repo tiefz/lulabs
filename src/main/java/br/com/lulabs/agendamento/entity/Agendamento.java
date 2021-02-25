@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 
 @Entity @Data @NoArgsConstructor @AllArgsConstructor
 @Table(name = "AGENDAMENTO")
-public class AgendamentoEntity implements Serializable {
+public class Agendamento implements Serializable {
     private static final Long serialVersionUID = 1L;
 
     @Id
