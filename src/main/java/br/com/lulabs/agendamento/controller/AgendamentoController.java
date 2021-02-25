@@ -1,9 +1,7 @@
 package br.com.lulabs.agendamento.controller;
 
 import br.com.lulabs.agendamento.entity.Agendamento;
-import br.com.lulabs.agendamento.repository.AgendamentoRepository;
 import br.com.lulabs.agendamento.service.AgendamentoService;
-import com.sun.javaws.progress.PreloaderPostEventListener;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -13,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
