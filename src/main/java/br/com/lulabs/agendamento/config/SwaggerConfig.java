@@ -35,7 +35,7 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 .title("Luizalabs Mensagens")
                 .description("Desafio de conhecimento técnico para processo seletivo Luizalabs. Plataforma de comunicação com agendamento de mensagens, consulta e cancelamento de envio de mensagens através de uma API utilizando o modelo RESTful utilizando Springboot e PostgreSQL")
-                .version("1.0.10")
+                .version("1.1.0")
                 .license("The Unlicensed")
                 .licenseUrl("http://unlicense.org/")
                         .contact(new Contact("Daniel Tief", "www.linkedin.com/in/tiefenbarher", "chinorex@gmail.com"))
