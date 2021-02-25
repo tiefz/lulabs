@@ -2,6 +2,7 @@
 
 [![GitHub issues](https://img.shields.io/github/issues/tiefz/calculadhora.svg)](https://GitHub.com/tiefz/lulabs/issues/) [![GitHub issues-closed](https://img.shields.io/github/issues-closed/tiefz/lulabs.svg)](https://GitHub.com/tiefz/lulabs/issues?q=is%3Aissue+is%3Aclosed)
 
+[![Build Status](https://travis-ci.com/tiefz/lulabs.svg?branch=master)](https://travis-ci.com/tiefz/lulabs)
 
 # Luizalabs Agendamento
 ## Desafio Técnico Luizalabs Agendamento de Mensagens
@@ -15,7 +16,7 @@ Modelo do banco PostgreSQL:
 
 Banco LULABS  |  Tabela agendamento
 ------------- | --------------------
-id | int 
+id | BIGINT 
 data_criacao | TIMESTAMP 
 destinatario | VARCHAR 100
 mensagem | VARCHAR 280
@@ -34,36 +35,38 @@ plataforma | VARCHAR 60
 
 ### Método POST - Criação de agendamento:
 
-Endpoint: https://lulabs.herokuapp.com/agendamento
+Endpoint: https://lulabs.herokuapp.com/agendamentos
 JSON: {"destinatario":"teste","mensagem":"Mensagem teste", "plataforma":"SMS","dataEnvio":"01-05-2021 00:00:00"}
 
-curl -d '{"destinatario":"teste","mensagem":"Mensagem teste", "plataforma":"SMS","dataEnvio":"01-05-2021 00:00:00"}' -H 'Content-Type: application/json' https://lulabs.herokuapp.com/agendamento
+curl -d '{"destinatario":"teste","mensagem":"Mensagem teste", "plataforma":"SMS","dataEnvio":"01-05-2021 00:00:00"}' -H 'Content-Type: application/json' https://lulabs.herokuapp.com/agendamentos
 
 ### Método GET - Consultar um agendamento por ID ou todos os agendamentos 
 
-Endpoint: https://lulabs.herokuapp.com/agendamento/consulta 
-Endpoint: https://lulabs.herokuapp.com/agendamento/consulta/{id}
+Endpoint: https://lulabs.herokuapp.com/agendamentos 
+Endpoint: https://lulabs.herokuapp.com/agendamentos/{id}
 
 ### Método DELETE - Remover um agendamento
 
-Endpoint: https://lulabs.herokuapp.com/agendamento/consulta/{id}
+Endpoint: https://lulabs.herokuapp.com/agendamentos/{id}
 
 ### Documentação da API em Swagger:
-    http://localhost:8080//swagger-ui.html#/agendamento-controller
-    Heroku URL: https://lulabs.herokuapp.com/swagger-ui.html
+http://localhost:8080//swagger-ui.html#/agendamento-controller
+#### Heroku URL: https://lulabs.herokuapp.com/swagger-ui.html/agendamento-controller
 
 ### Projeto e Kanban:
-    https://github.com/tiefz/lulabs/projects/1
+https://github.com/tiefz/lulabs/projects/1
 
 
 # Teste local
+    Banco de dados PostgreSQL - 
+    DB = lulabs 
+    Usuario = postgres
+    Senha = postgres
 
-Banco de dados PostgreSQL - 
-DB = lulabs 
-Usuario = postgres
-Senha = postgres
-
-Se preferir, utilizar imagem do Docker: ocker run --name lulabs-postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -e POSTGRES_DB=lulabs -p 5432:5432 -d postgres:9.6.21-alpine
+Se preferir, utilizar imagem do Docker: 
+```
+docker run --name lulabs-postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -e POSTGRES_DB=lulabs -p 5432:5432 -d postgres:9.6.21-alpine
+````
 
 Clonar o projeto e para teste seguir os mesmos endpoints do exemplo acima
 Para criação de agendamento, utilizar JSON no formato abaixo:
@@ -129,3 +132,10 @@ services:
 
 #### Versão 1.0.10
 - Implementação de classes de Testes com JUnit em testes > AgendamentoTestes
+
+#### Versão 1.0.11
+- Correção de nomenclaturas de classes e métodos para otimização do código e melhor leitura
+- Implementação de uma classe service para organizar os métodos separando a camada de negócio
+
+#### Versão 1.0.12
+Implementação de CI com Travis e deploy automático no Heroku
