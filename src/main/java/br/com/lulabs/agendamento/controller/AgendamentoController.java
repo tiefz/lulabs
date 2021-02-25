@@ -1,7 +1,9 @@
 package br.com.lulabs.agendamento.controller;
 
-import br.com.lulabs.agendamento.model.AgendamentoModel;
+import br.com.lulabs.agendamento.entity.Agendamento;
 import br.com.lulabs.agendamento.repository.AgendamentoRepository;
+import br.com.lulabs.agendamento.service.AgendamentoService;
+import com.sun.javaws.progress.PreloaderPostEventListener;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -16,69 +18,63 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping(path = "/v1")
 public class AgendamentoController {
 
     @Autowired
-    AgendamentoRepository agendamentoRepository;
+    AgendamentoService service;
 
     @ApiOperation(value = "Cria um agendamento para envio de mensagens")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Agendamento criado!"),
-            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+            @ApiResponse(code = 204, message = "Conteúdo não encontrado"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
-    @PostMapping("/agendamento")
-    public ResponseEntity<AgendamentoModel> salvaAgendamento(@RequestBody @Valid AgendamentoModel agendamentoModel) {
-        agendamentoModel.setDataCriacao(LocalDateTime.now());
-        return new ResponseEntity<AgendamentoModel>(agendamentoRepository.save(agendamentoModel), HttpStatus.CREATED);
+    @PostMapping("/agendamentos")
+    public ResponseEntity<Agendamento> salvar(@RequestBody @Valid Agendamento agendamento) {
+        return new ResponseEntity<Agendamento>(service.salvar(agendamento), HttpStatus.CREATED);
     }
 
     @ApiOperation(value = "Retorna a lista de agendamentos")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Retorna a lista de agendamentos"),
-            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+            @ApiResponse(code = 204, message = "Conteúdo não encontrado"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
-    @GetMapping("/agendamento/consulta")
-    private ResponseEntity<List<AgendamentoModel>> consultaAgendamento() {
-        List<AgendamentoModel> agendamentos = agendamentoRepository.findAll();
-        if (agendamentos.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    @GetMapping("/agendamentos")
+    private ResponseEntity<List<Agendamento>> consultar() {
+        List<Agendamento> consultas = service.buscar();
+        if (consultas.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
-            return new ResponseEntity<List<AgendamentoModel>>(agendamentos, HttpStatus.OK);
+            return new ResponseEntity<List<Agendamento>>(consultas, HttpStatus.OK);
         }
     }
 
     @ApiOperation(value = "Retorna um agendamento através de um ID")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Retorna um agendamento através de um ID"),
-            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+            @ApiResponse(code = 204, message = "Conteúdo não encontrado"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
-    @GetMapping("/agendamento/consulta/{id}")
-    private ResponseEntity<AgendamentoModel> consultaAgendamentoPorId(@PathVariable(value = "id") long id) {
-        Optional<AgendamentoModel> agendamentoResponse = agendamentoRepository.findById(id);
-        if (agendamentoResponse.isPresent()) {
-            return new ResponseEntity<AgendamentoModel>(agendamentoResponse.get(), HttpStatus.OK);
+    @GetMapping("/agendamentos/{id}")
+    private ResponseEntity<Agendamento> consultaPorId(@PathVariable(value = "id") long id) {
+        Optional<Agendamento> consulta = service.buscarPorId(id);
+        if (consulta.isPresent()) {
+            return new ResponseEntity<Agendamento>(consulta.get(), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
 
     @ApiOperation(value = "Remove um agendamento através de um ID")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Agendamento removido"),
-            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+            @ApiResponse(code = 204, message = "Conteúdo não encontrado"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
-    @DeleteMapping("/agendamento/consulta/{id}")
-    private ResponseEntity<AgendamentoModel> removeAgendamento(@PathVariable(value = "id") long id) {
-        Optional<AgendamentoModel> agendamentoResponse = agendamentoRepository.findById(id);
-        if (agendamentoResponse.isPresent()) {
-            agendamentoRepository.delete(agendamentoResponse.get());
-            return new ResponseEntity<>(HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    @DeleteMapping("/agendamentos/{id}")
+    private ResponseEntity<Agendamento> remover(@PathVariable(value = "id") long id) {
+        return service.remover(id) ? new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
