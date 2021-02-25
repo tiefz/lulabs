@@ -8,6 +8,5 @@ before_script:
  - sudo -u postgres psql -c "ALTER ROLE postgres WITH password 'postgres'"
 deploy:
  provider: heroku
- api-key: 
-  secure: $HEROKU_API_KEY
+ api-key: $TOKEN
  app: $APP
