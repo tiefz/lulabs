@@ -1,7 +1,7 @@
 package br.com.lulabs.agendamento.controller;
 
 import br.com.lulabs.agendamento.entity.Agendamento;
-import br.com.lulabs.agendamento.service.AgendamentoService;
+import br.com.lulabs.agendamento.service.AgendamentoServiceImpl;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -19,7 +19,7 @@ import java.util.Optional;
 public class AgendamentoController {
 
     @Autowired
-    AgendamentoService service;
+    AgendamentoServiceImpl service;
 
     @ApiOperation(value = "Cria um agendamento para envio de mensagens")
     @ApiResponses(value = {
